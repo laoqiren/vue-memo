@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # testapp
 
-> A Vue.js project
+> A Vue.js project By Laoqiren
 
 ## Build Setup
 

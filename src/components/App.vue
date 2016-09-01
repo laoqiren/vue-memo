@@ -1,73 +1,83 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-5 col-md-2 col-md-offset-0">.col-sm-5 .col-md-6</div>
-            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-2">
-                <table class="table table-striped table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                        <th>表格标题</th>
-                        <th>表格标题</th>
-                        <th>表格标题</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>表格单元格</td>
-                        <td>表格单元格</td>
-                        <td>表格单元格</td>
-                        </tr>
-                        <tr>
-                        <td>表格单元格</td>
-                        <td>表格单元格</td>
-                        <td>表格单元格</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-md-12 col-lg-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-1">name</label>
-                        <div class="col-sm-11">
-                        <input type="text" id="name" class="form-control input-lg"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">name</label>
-                        <input type="text" id="name" class="form-control"/>
-                        <label for="name">name</label>
-                        <input type="text" id="name" class="form-control"/>
-                        <label for="name">name</label>
-                        <input type="text" id="name" class="form-control"/>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-6 col-md-3 col-md-offset-2 col-lg-5 col-lg-offset-5">
-                <ul class="list-unstyled list-inline">
-                    <li>gsg</li>
-                    <li>fafa</li>
-                    <li>afa</li>
-                    <li>afa</li>
-                    <li>fafa</li>
-                </ul>
+    <div id="wrapper">
+        <router-view :memos="memos"></router-view>
+        <div class="btn-wrap" id="footer">
+            <div class="btn-group btn-group-justified">
+                <a class="btn btn-default btn-lg" v-link="'/Home'"><i class="glyphicon glyphicon-home"></i><br/>首页</a>
+                <a class="btn btn-default btn-lg show-btn" @click="clearNew" v-link="'/Show'"><i class="glyphicon glyphicon-tag"></i><br/><span v-if="hasNew" class="badge new-icon" >new</span>备忘录</a>
+                <a class="btn btn-default btn-lg"  v-link="'/Create'"><i class="glyphicon glyphicon-plus"></i><br/>创建</a>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="sass">
-    .container-fluid {
-        .row div{
-            //margin-left:20px;
-            margin-bottom:10px;
+    #wrapper {
+        width:100%;
+        height:100%;
+        .container-fluid{
+            height:60%;
         }
+        #footer {
+            position:fixed;
+            bottom:0;
+            a {
+                height:65px;
+            }
+            .show-btn {
+                position:relative;
+                .new-icon {
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    background-color:red
+                }
+            }
+            
+        }
+    }
+    .btn-default:hover {
+        background-color:green;
+        color:white;
+    }
+    .v-link-active {
+        background-color:green;
+        color:white
     }
 </style>
 
 <script>
-    export default {
+    import DataBase from './storage.js';
+    export default{
+        created(){
+            var memos = DataBase.query();
+            //console.log(memos)
+            this.memos = memos;
+            console.log(this.memos);
+        },
+        data(){
+            return {
+                memos:[],
+                hasNew: false
+            }
+        },
+        events: {
+            memoUpdate(memo){
+                this.hasNew = true;
+                this.memos.push(memo);
+                console.log(memo.memo)
+                DataBase.add(memo.date,memo.time,memo.place,memo.memo);
+            },
+            memoDelete(index){
+                //console.log(index);
+                this.memos.splice(index,1);
+                DataBase.deleteM(index);
+            }
+        },
+        methods: {
+            clearNew(){
+                this.hasNew = false;
+            }
+        }
     }
 </script>
