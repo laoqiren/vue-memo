@@ -44,7 +44,7 @@
         methods: {
             save(){
                 var memo = this.memo;
-                this.$dispatch('memoUpdate', memo)
+                this.$dispatch('memoUpdate', memo);
             }
         }
     }

@@ -14,14 +14,14 @@
 <style>
     .showTotal {
         font-size: 25px;
-        margin-top:25%;
+        margin-top:10%;
     }
     .total {
         color:red
     }
     .intro {
         font-size:20px;
-        margin-top:15px;
+        margin-top:5px;
     }
 </style>
 <script>

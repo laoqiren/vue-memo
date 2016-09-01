@@ -18,6 +18,10 @@
                                     <i class="glyphicon glyphicon-time"></i>
                                     {{memo.time}}
                                 </p>
+                                <p>
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    {{memo.place}}
+                                </p>
                             </div>
                             <div class="col-xs-5">
                                 {{memo.memo}}

@@ -1,11 +1,14 @@
 <template>
     <div id="wrapper">
-        <router-view :memos="memos"></router-view>
+        <div id="main">
+            <router-view :memos="memos"></router-view>
+        </div>
+        
         <div class="btn-wrap" id="footer">
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default btn-lg" v-link="'/Home'"><i class="glyphicon glyphicon-home"></i><br/>首页</a>
-                <a class="btn btn-default btn-lg show-btn" @click="clearNew" v-link="'/Show'"><i class="glyphicon glyphicon-tag"></i><br/><span v-if="hasNew" class="badge new-icon" >new</span>备忘录</a>
-                <a class="btn btn-default btn-lg"  v-link="'/Create'"><i class="glyphicon glyphicon-plus"></i><br/>创建</a>
+                <a class="btn btn-default" v-link="'/Home'"><i class="glyphicon glyphicon-home"></i><br/>首页</a>
+                <a class="btn btn-default show-btn" @click="clearNew" v-link="'/Show'"><i class="glyphicon glyphicon-tag"></i><br/><span v-if="hasNew" class="badge new-icon" >new</span>备忘录</a>
+                <a class="btn btn-default"  v-link="'/Create'"><i class="glyphicon glyphicon-plus"></i><br/>创建</a>
             </div>
         </div>
     </div>
@@ -15,15 +18,17 @@
     #wrapper {
         width:100%;
         height:100%;
+        position:relative;
         .container-fluid{
             height:60%;
         }
+        #main {
+            height:80%;
+            overflow:auto;
+        }
         #footer {
-            position:fixed;
+            position:absolute;
             bottom:0;
-            a {
-                height:65px;
-            }
             .show-btn {
                 position:relative;
                 .new-icon {
