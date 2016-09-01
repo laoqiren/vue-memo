@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # testapp
 
 > A Vue.js project
@@ -25,3 +26,7 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# vue-memo
+基于Vuejs的备忘录webapp
+>>>>>>> 95ce5d83926ca020b388a1a1126b55e51d37188c
